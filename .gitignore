@@ -10,3 +10,7 @@ bundled
 coverage
 pkg
 tmp
+/.idea/misc.xml
+/.idea/demo-api.iml
+/.idea/modules.xml
+/.idea/vcs.xml

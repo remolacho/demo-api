@@ -1,11 +1,5 @@
 # Jets Project
 
-This README would normally document whatever steps are necessary to get the application up and running.
+### Para desplegar ambiente dev
+AWS_PROFILE=develop jets deploy
 
-Things you might want to cover:
-
-* Dependencies
-* Configuration
-* Database setup
-* How to run the test suite
-* Deployment instructions
