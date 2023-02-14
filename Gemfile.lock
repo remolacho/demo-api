@@ -112,6 +112,10 @@ GEM
     date (3.3.3)
     diff-lcs (1.5.0)
     dotenv (2.8.1)
+    dynamoid (3.8.0)
+      activemodel (>= 4)
+      aws-sdk-dynamodb (~> 1.0)
+      concurrent-ruby (>= 1.0)
     dynomite (1.2.7)
       activesupport
       aws-sdk-dynamodb
@@ -250,6 +254,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara
+  dynamoid
   dynomite
   jets (~> 3.2.0)
   launchy

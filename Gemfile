@@ -5,6 +5,7 @@ gem "jets", "~> 3.2.0"
 
 gem "dynomite"
 gem "zeitwerk", ">= 2.5.0"
+gem "dynamoid"
 
 # development and test groups are not bundled as part of the deployment
 group :development, :test do
