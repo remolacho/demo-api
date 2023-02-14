@@ -1,1 +1,5 @@
 pack
+.bundle
+/public/packs
+/public/packs-test
+vendor
