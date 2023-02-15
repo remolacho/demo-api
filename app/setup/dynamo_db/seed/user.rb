@@ -6,8 +6,8 @@ class ::DynamoDb::Seed::User < ::DynamoDb::Setup
       check_env!
 
       User.import([
-                    { name: "jhon", lastname: "due"},
-                    { name: "jhon2", lastname: "due2"}
+                    { name: "jhon", lastname: "due", row: ["test1", 1, true]},
+                    { name: "jhon2", lastname: "due2", row: ["test2", 2, false]}
                   ])
     end
   end

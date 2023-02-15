@@ -12,7 +12,7 @@ Dynamoid.configure do |config|
   config.region = ENV['REGION']
 
   # Do not add prefixes to table names. By default dynamoid uses `dynamoid_#{application_name}_#{environment}` prefix:
-  config.namespace = nil
+  config.namespace = Jets.config.table_namespace
 
   # Tells Dynamoid to use exponential backoff for batch operations (BatchGetItem, BatchPutItem)
   config.backoff = { exponential: { base_backoff: 0.2.seconds, ceiling: 10 } }
@@ -23,3 +23,5 @@ Dynamoid.configure do |config|
   # Store datetimes as ISO-8601 strings by default. Otherwise UNIX timestamps will be used.
   config.store_datetime_as_string = true
 end
+
+::DynamoDb::Create.tables
