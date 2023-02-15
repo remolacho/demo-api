@@ -63,4 +63,6 @@ Jets.application.configure do
   # config.logger = Jets::Logger.new($stderr)
 
   config.controllers.default_protect_from_forgery = false
+
+  Dir[Jets.root.join('setup/**/*.rb')].each{ |f| require f }
 end

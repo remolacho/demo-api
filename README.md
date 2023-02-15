@@ -26,3 +26,8 @@ https://community.boltops.com/t/could-not-find-timeout-0-3-1-in-any-of-the-sourc
 - ir al directorio de descarga ejm cd /home/user/DynamoDB/dynamodb_local_latest
 - correr en la terminal java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
 - instalar el aws NoSQL Workbench https://docs.aws.amazon.com/es_es/amazondynamodb/latest/developerguide/workbench.settingup.html
+
+### Crear las tablas
+- jets c
+- DynamoDb::Create.tables
+- DynamoDb::Delete.tables
