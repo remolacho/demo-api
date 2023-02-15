@@ -3,7 +3,7 @@
 class DynamoDb::Delete < DynamoDb::Setup
   class << self
     def tables
-      check_env!
+      return unless check_env?
 
       DynamoDb::Models::DYNAMOID_MODELS.each  do |m|
         m.delete_table

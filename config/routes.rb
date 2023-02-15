@@ -1,7 +1,9 @@
 Jets.application.routes.draw do
 
   namespace :demo do
-    get 'list/index'
+    get 'user/index'
+    post 'user/create'
+    get 'user/import'
   end
 
   root "jets/public#show"

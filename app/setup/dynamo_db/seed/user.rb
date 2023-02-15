@@ -3,7 +3,7 @@
 class ::DynamoDb::Seed::User < ::DynamoDb::Setup
   class << self
     def import
-      check_env!
+      return unless check_env?
 
       User.import([
                     { name: "jhon", lastname: "due", row: ["test1", 1, true]},

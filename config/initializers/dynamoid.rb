@@ -4,7 +4,7 @@ require "dynamoid"
 
 Dynamoid.configure do |config|
   # Local DDB endpoint:
-  config.endpoint = ENV['EP_URL_DYNAMO_DB'] if ENV['EP_URL_DYNAMO_DB'].present?
+  config.endpoint = ENV['EP_URL_DYNAMO_DB']
 
   # Fake AWS credentials for local development purposes:
   config.access_key = ENV['ACCESS_KEY']

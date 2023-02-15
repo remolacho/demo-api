@@ -8,5 +8,8 @@ class User < ApplicationItem
 
   field :name, :string
   field :lastname, :string
+  field :token, :string
   field :row, :array
+
+  global_secondary_index hash_key: :token
 end

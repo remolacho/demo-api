@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "jets", "~> 3.2.0"
-
+gem 'mini_portile2', '~> 2.8.1'
 
 gem "dynomite"
 gem "zeitwerk", ">= 2.5.0"
@@ -14,6 +14,11 @@ group :development, :test do
   gem 'shotgun'
   gem 'rack'
   gem 'puma'
+end
+
+group :local do
+  gem 'pry', '~> 0.13.0'
+  gem 'pry-byebug', '~> 3.9.0'
 end
 
 group :test do

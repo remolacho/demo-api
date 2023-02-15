@@ -9,10 +9,11 @@ class DynamoDb::Setup
       raise NotImplementedError, "the method tables wasn't implement"
     end
 
-    def check_env!
-      return if ENV['JETS_ENV'] == 'local'
+    def check_env?
+      return false unless ENV['JETS_ENV'] == 'local' || ENV['JETS_ENV'] == 'development'
 
-      raise "Do not run on production envs!"
+      true
     end
+
   end
 end
