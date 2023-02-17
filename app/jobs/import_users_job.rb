@@ -3,8 +3,8 @@
 class ImportUsersJob < ApplicationJob
 
   def create
-    puts "event #{event.inspect}"
-    sleep(5)
-    User.create(event)
+    event[:users].each do |user|
+      CreateUserJob.perform_later(:create, user)
+    end
   end
 end

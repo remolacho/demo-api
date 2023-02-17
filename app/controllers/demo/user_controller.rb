@@ -9,18 +9,29 @@ class Demo::UserController < ApplicationController
   end
 
   def import
-    0..1000.times do |i|
-      user = {
+    limit =  params[:limit].to_i
+    limit = limit.zero? ? 1000 : limit
+
+    users = []
+
+    0..limit.times do |i|
+      users << {
         name: "Jhon#{i}",
         lastname: "Due#{i}",
         token: SecureRandom.hex,
         row: ["test#{i}", i, active?(i)]
       }
-
-      ImportUsersJob.perform_later(:create, user)
     end
 
+    ImportUsersJob.perform_later(:create, { users: users })
+
     render json: { message: "se crearan en segundo plano" }, status: 200
+  end
+
+  def delete_all
+    User.delete_all
+
+    render json: { message: "se eliminaron todos los registros" }
   end
 
   private

@@ -4,6 +4,7 @@ Jets.application.routes.draw do
     get 'user/index'
     post 'user/create'
     get 'user/import'
+    get 'user/delete_all'
   end
 
   root "jets/public#show"
