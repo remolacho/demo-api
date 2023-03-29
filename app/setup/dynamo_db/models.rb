@@ -2,5 +2,5 @@
 #
 class DynamoDb::Models
   # List all your Dynamoid models here:
-  DYNAMOID_MODELS = [User].freeze
+  DYNAMOID_MODELS = [TransactionJob, User].freeze
 end

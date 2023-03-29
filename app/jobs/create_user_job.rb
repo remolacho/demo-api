@@ -3,8 +3,26 @@
 class CreateUserJob < ApplicationJob
 
   def create
-    puts "event #{event.inspect}"
     sleep(2)
-    User.create(event)
+
+    puts "CreateUserJob #####################################################################"
+
+    user = User.create!(event[:user].merge({ status: 1, error:  '' }))
+
+    transaction_jobs.finish(user.transaction_id) do
+      puts "se finalizaron todos los registros #####################################################################"
+    end
+  rescue StandardError => e
+    user = User.create!(event[:user].merge({ status: 2, error: e.to_s }))
+
+    transaction_jobs.finish(user.transaction_id) do
+      puts "se finalizaron todos los registros #####################################################################"
+    end
+  end
+
+  private
+
+  def transaction_jobs
+    @transaction_jobs ||= Transactions::Run.new
   end
 end
