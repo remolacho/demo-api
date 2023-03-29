@@ -14,11 +14,7 @@
 - si JETS_ENV=local usara en tu maquina local el env.local
 - si JETS_ENV=development usara en tu maquina local el env.development
 
-### Para desplegar ambiente dev se usa JETS_ENV=development
-- JETS_ENV=development AWS_PROFILE=develop jets deploy si tienes varios perfiles
-- JETS_ENV=development jets deploy si solo tienes la por defecto
-
-### si se produce el error "Could not find timeout-0.3.1 in any of the sources."
+### si se produce el error "Could not find timeout-0.3.1 in any of the sources." puede arreglarlo asi o ejecutar "bundle exec"
 https://community.boltops.com/t/could-not-find-timeout-0-3-1-in-any-of-the-sources/996
 
 ### DB dynamoDB
@@ -31,3 +27,10 @@ https://community.boltops.com/t/could-not-find-timeout-0-3-1-in-any-of-the-sourc
 - jets c
 - DynamoDb::Create.tables
 - DynamoDb::Delete.tables
+
+### Para desplegar ambiente dev se usa JETS_ENV=development
+- JETS_ENV=development AWS_PROFILE=develop bundle exec jets deploy si tienes varios perfiles
+- JETS_ENV=development bundle exec jets deploy si solo tienes la por defecto
+
+### Correr en local apuntando a dynamobb en AWS, esto creara las tablas en la nube
+- JETS_ENV=development bundle exec jets server 

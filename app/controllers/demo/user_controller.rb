@@ -9,23 +9,14 @@ class Demo::UserController < ApplicationController
   end
 
   def import
-    limit =  params[:limit].to_i
-    limit = limit.zero? ? 1000 : limit
+    jobs_limit = params[:limit].to_i.zero? ? 50_000 : params[:limit].to_i
 
-    users = []
-
-    0..limit.times do |i|
-      users << {
-        name: "Jhon#{i}",
-        lastname: "Due#{i}",
-        token: SecureRandom.hex,
-        row: ["test#{i}", i, active?(i)]
-      }
+    transaction_jobs.create('User',  jobs_limit) do |transaction|
+      ImportUsersJob.perform_later(:create, {transaction_token: transaction.token })
+      render json: { message: "se crearan en segundo plano" }, status: 200
     end
-
-    ImportUsersJob.perform_later(:create, { users: users })
-
-    render json: { message: "se crearan en segundo plano" }, status: 200
+  rescue StandardError => e
+    render json: { message: e.to_s }, status: 400
   end
 
   def delete_all
@@ -36,8 +27,8 @@ class Demo::UserController < ApplicationController
 
   private
 
-  def active?(i)
-    i%2 == 0
+  def transaction_jobs
+    @transaction_jobs ||= Transactions::Run.new
   end
 
   def allowed_params
