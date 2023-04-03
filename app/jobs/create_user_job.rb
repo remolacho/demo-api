@@ -9,15 +9,11 @@ class CreateUserJob < ApplicationJob
 
     user = User.create!(event[:user].merge({ status: 1, error:  '' }))
 
-    transaction_jobs.finish(user.transaction_id) do
-      puts "se finalizaron todos los registros #####################################################################"
-    end
+    transaction_jobs.finish(user.transaction_id)
   rescue StandardError => e
     user = User.create!(event[:user].merge({ status: 2, error: e.to_s }))
 
-    transaction_jobs.finish(user.transaction_id) do
-      puts "se finalizaron todos los registros #####################################################################"
-    end
+    transaction_jobs.finish(user.transaction_id)
   end
 
   private

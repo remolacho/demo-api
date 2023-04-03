@@ -11,6 +11,7 @@ class TransactionJob < ApplicationItem
   field :call_back, :string
   field :status, :integer
   field :amount_jobs, :integer
+  field :processed_jobs, :integer
   field :error, :string
 
   global_secondary_index hash_key: :token

@@ -7,6 +7,7 @@ module Transactions
       transaction = TransactionJob.create(token: SecureRandom.uuid,
                                           status: 0,
                                           amount_jobs: amount_jobs,
+                                          processed_jobs: 0,
                                           error: '',
                                           model: klass.camelcase)
 
@@ -42,11 +43,24 @@ module Transactions
 
     def finish(transaction_id)
       transaction = TransactionJob.find(transaction_id)
-      return if has_error?(transaction) || !all_jobs_completed?(transaction)
+      return if has_error?(transaction)
+
+      data = load_meta_data(transaction)
+      transaction.processed_jobs = data.total_records
+
+      unless data.all_jobs_completed
+        transaction.save
+        return
+      end
 
       transaction.status = 2
       transaction.save!
-      yield
+
+      set_transaction(transaction)
+
+      yield(transaction) if block_given? && resource.present?
+
+      puts "se finalizaron todos los jobs #####################################################################"
     rescue StandardError => e
       internal_cancel(e)
     end
@@ -70,10 +84,12 @@ module Transactions
       @resource = transaction
     end
 
-    def all_jobs_completed?(transaction)
+    def load_meta_data(transaction)
       klass = Object.const_get(transaction.model)
       total_records = klass.where(transaction_id: transaction.id).count
-      total_records >= transaction.amount_jobs
+      completed = total_records >= transaction.amount_jobs
+
+      Struct.new(:all_jobs_completed, :total_records).new(completed, total_records)
     end
 
     def has_error?(transaction)
